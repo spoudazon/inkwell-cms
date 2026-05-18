@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use DI\Container;
-use MzStack\InkwellCms\Runtime\AppRuntimeConfig;
+use Spoudazon\InkwellCms\Runtime\AppRuntimeConfig;
 use Symfony\Component\ErrorHandler\Exception\FlattenException;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\RequestStack;

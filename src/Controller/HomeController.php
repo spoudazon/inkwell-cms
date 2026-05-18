@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MzStack\InkwellCms\Controller;
+namespace Spoudazon\InkwellCms\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 

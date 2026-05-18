@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MzStack\InkwellCms\Tests\Unit\Runtime;
+namespace Spoudazon\InkwellCms\Tests\Unit\Runtime;
 
 use InvalidArgumentException;
-use MzStack\InkwellCms\Runtime\AppEnvironment;
+use Spoudazon\InkwellCms\Runtime\AppEnvironment;
 use PHPUnit\Framework\TestCase;
 
 final class AppEnvironmentTest extends TestCase

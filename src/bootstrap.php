@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use DI\ContainerBuilder;
-use MzStack\InkwellCms\Runtime\AppEnvironment;
-use MzStack\InkwellCms\Runtime\AppRuntimeConfig;
+use Spoudazon\InkwellCms\Runtime\AppEnvironment;
+use Spoudazon\InkwellCms\Runtime\AppRuntimeConfig;
 
 $runtimeConfig = AppRuntimeConfig::fromServer($_SERVER);
 

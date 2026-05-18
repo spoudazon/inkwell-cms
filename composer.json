@@ -1,19 +1,19 @@
 {
-    "name": "mzstack/inkwell-cms",
+    "name": "spoudazon/inkwell-cms",
     "description": "Flat-file CMS and blogging engine powered by Markdown",
     "type": "project",
     "license": "MIT",
     "keywords": ["cms", "blog", "markdown", "flat-file", "static"],
-    "homepage": "https://github.com/mzstack/inkwell-cms",
+    "homepage": "https://github.com/spoudazon/inkwell-cms",
     "authors": [
         {
-            "name": "mzstack",
-            "homepage": "https://github.com/mzstack"
+            "name": "spoudazon",
+            "homepage": "https://github.com/spoudazon"
         }
     ],
     "support": {
-        "issues": "https://github.com/mzstack/inkwell-cms/issues",
-        "source": "https://github.com/mzstack/inkwell-cms"
+        "issues": "https://github.com/spoudazon/inkwell-cms/issues",
+        "source": "https://github.com/spoudazon/inkwell-cms"
     },
     "require": {
         "php": "^8.4",
@@ -25,12 +25,12 @@
     },
     "autoload": {
         "psr-4": {
-            "MzStack\\InkwellCms\\": "src/"
+            "Spoudazon\\InkwellCms\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "MzStack\\InkwellCms\\Tests\\": "tests/"
+            "Spoudazon\\InkwellCms\\Tests\\": "tests/"
         }
     },
     "scripts": {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MzStack\InkwellCms\Runtime;
+namespace Spoudazon\InkwellCms\Runtime;
 
 use DI\Container;
 use Symfony\Component\HttpFoundation\Request;

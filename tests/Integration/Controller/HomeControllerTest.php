@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MzStack\InkwellCms\Tests\Integration\Controller;
+namespace Spoudazon\InkwellCms\Tests\Integration\Controller;
 
-use MzStack\InkwellCms\Tests\Integration\WebTestCase;
+use Spoudazon\InkwellCms\Tests\Integration\WebTestCase;
 
 final class HomeControllerTest extends WebTestCase
 {

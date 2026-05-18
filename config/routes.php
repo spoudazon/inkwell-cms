@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use MzStack\InkwellCms\Controller\HomeController;
+use Spoudazon\InkwellCms\Controller\HomeController;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 

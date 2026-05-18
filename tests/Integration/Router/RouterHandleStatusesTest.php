@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MzStack\InkwellCms\Tests\Integration\Router;
+namespace Spoudazon\InkwellCms\Tests\Integration\Router;
 
-use MzStack\InkwellCms\Tests\Integration\WebTestCase;
+use Spoudazon\InkwellCms\Tests\Integration\WebTestCase;
 
 final class RouterHandleStatusesTest extends WebTestCase
 {

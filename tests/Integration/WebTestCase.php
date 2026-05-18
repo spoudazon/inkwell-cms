@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MzStack\InkwellCms\Tests\Integration;
+namespace Spoudazon\InkwellCms\Tests\Integration;
 
 use DI\Container;
 use PHPUnit\Framework\TestCase;

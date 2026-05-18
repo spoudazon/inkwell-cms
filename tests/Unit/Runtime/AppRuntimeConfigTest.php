@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace MzStack\InkwellCms\Tests\Unit\Runtime;
+namespace Spoudazon\InkwellCms\Tests\Unit\Runtime;
 
 use InvalidArgumentException;
-use MzStack\InkwellCms\Runtime\AppEnvironment;
-use MzStack\InkwellCms\Runtime\AppRuntimeConfig;
+use Spoudazon\InkwellCms\Runtime\AppEnvironment;
+use Spoudazon\InkwellCms\Runtime\AppRuntimeConfig;
 use PHPUnit\Framework\TestCase;
 
 final class AppRuntimeConfigTest extends TestCase
