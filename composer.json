@@ -1,0 +1,37 @@
+{
+    "name": "mzstack/inkwell-cms",
+    "description": "Flat-file CMS and blogging engine powered by Markdown",
+    "type": "project",
+    "license": "MIT",
+    "keywords": ["cms", "blog", "markdown", "flat-file", "static"],
+    "homepage": "https://github.com/mzstack/inkwell-cms",
+    "authors": [
+        {
+            "name": "mzstack",
+            "homepage": "https://github.com/mzstack"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/mzstack/inkwell-cms/issues",
+        "source": "https://github.com/mzstack/inkwell-cms"
+    },
+    "require": {
+        "php": "^8.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "MzStack\\InkwellCms\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MzStack\\InkwellCms\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
