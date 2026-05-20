@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 use DI\Container;
+use Spoudazon\InkwellCms\Controller\ErrorController;
 use Spoudazon\InkwellCms\Runtime\AppRuntimeConfig;
-use Symfony\Component\ErrorHandler\Exception\FlattenException;
+use Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Controller\ContainerControllerResolver;
 use Symfony\Component\HttpKernel\Controller\ControllerResolverInterface;
 use Symfony\Component\HttpKernel\EventListener\ErrorListener;
@@ -19,7 +19,6 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use function DI\autowire;
 use function DI\factory;
 use function DI\get;
-use function DI\string;
 
 return [
     'app.root' => dirname(__DIR__),
@@ -27,6 +26,10 @@ return [
     'app.routes' => factory(fn() => require __DIR__ . '/routes.php'),
 
     RequestContext::class => factory(fn() => new RequestContext()),
+
+    HtmlErrorRenderer::class => factory(fn(Container $c) => new HtmlErrorRenderer(
+        debug: $c->get(AppRuntimeConfig::class)->isDebug(),
+    )),
 
     UrlMatcher::class => factory(function (Container $c) {
         return new UrlMatcher($c->get('app.routes'), $c->get(RequestContext::class));
@@ -41,11 +44,7 @@ return [
     }),
 
     ErrorListener::class => factory(fn(Container $c) => new ErrorListener(
-        controller: fn(FlattenException $exception) => new Response(
-            $exception->getStatusText(),
-            $exception->getStatusCode(),
-            $exception->getHeaders(),
-        ),
+        controller: $c->get(ErrorController::class),
         logger: null,
         debug: $c->get(AppRuntimeConfig::class)->isDebug(),
         exceptionsMapping: [],
