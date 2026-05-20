@@ -28,7 +28,7 @@ jobs:
       - uses: ramsey/composer-install@a8d0d959dab41457692a5e2041bd9b757a119e3f # 3.2.1
 
       - name: Run PHPUnit with coverage
-        run: vendor/bin/phpunit --coverage-clover=coverage.xml
+        run: composer test:coverage
 
       - name: Upload coverage to Codecov
         if: ${{ env.CODECOV_TOKEN != '' }}
@@ -55,7 +55,7 @@ jobs:
       - uses: ramsey/composer-install@a8d0d959dab41457692a5e2041bd9b757a119e3f # 3.2.1
 
       - name: Run PHPStan
-        run: vendor/bin/phpstan analyse --error-format=github --no-progress
+        run: composer phpstan -- --error-format=github --no-progress
 
   coding-standards:
     name: PSR-12 (phpcs)
@@ -72,7 +72,7 @@ jobs:
       - uses: ramsey/composer-install@a8d0d959dab41457692a5e2041bd9b757a119e3f # 3.2.1
 
       - name: Run PHP_CodeSniffer
-        run: vendor/bin/phpcs --standard=PSR12 --report=full src tests
+        run: composer cs-check
 
   composer:
     name: composer validate + audit

@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-require __DIR__ . '/../vendor/autoload.php';
-$container = require __DIR__ . '/../src/bootstrap.php';
+use Spoudazon\InkwellCms\Runtime\AppKernel;
+use Spoudazon\InkwellCms\Runtime\AppRuntimeConfig;
 
-$appRunner = new \Spoudazon\InkwellCms\Runtime\AppRunner($container);
-$appRunner->run();
+require __DIR__ . '/../vendor/autoload.php';
+
+AppKernel::bootstrap(AppRuntimeConfig::fromServer($_SERVER))->run();

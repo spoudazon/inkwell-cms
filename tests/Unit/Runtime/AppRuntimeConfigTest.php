@@ -54,6 +54,46 @@ final class AppRuntimeConfigTest extends TestCase
         self::assertFalse($config->isDebug());
     }
 
+    public function testDebugIsBool(): void
+    {
+        $config = AppRuntimeConfig::fromServer([
+            'APP_ENV' => 'dev',
+            'APP_DEBUG' => false,
+        ]);
+
+        self::assertFalse($config->isDebug());
+    }
+
+    public function testDebugIsIntFalse(): void
+    {
+        $config = AppRuntimeConfig::fromServer([
+            'APP_ENV' => 'dev',
+            'APP_DEBUG' => 0,
+        ]);
+
+        self::assertFalse($config->isDebug());
+    }
+
+    public function testDebugIsIntTrue(): void
+    {
+        $config = AppRuntimeConfig::fromServer([
+            'APP_ENV' => 'dev',
+            'APP_DEBUG' => 1,
+        ]);
+
+        self::assertTrue($config->isDebug());
+    }
+
+    public function testInvalidType(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        AppRuntimeConfig::fromServer([
+            'APP_ENV' => 'dev',
+            'APP_DEBUG' => [],
+        ]);
+    }
+
     public function testThrowsForUnsupportedDebugValue(): void
     {
         $this->expectException(InvalidArgumentException::class);
