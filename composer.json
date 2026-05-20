@@ -37,7 +37,7 @@
         "test": "@php -d zend.assertions=1 vendor/bin/phpunit tests/",
         "test:coverage": [
             "@putenv XDEBUG_MODE=coverage",
-            "@php -d zend.assertions=1 vendor/bin/phpunit --coverage-html=coverage/ --coverage-clover=coverage.xml"
+            "@php -d zend.assertions=1 vendor/bin/phpunit --coverage-html=coverage/ --coverage-clover=coverage.xml tests/"
         ],
         "phpstan": "phpstan analyse",
         "cs-check": "phpcs --standard=PSR12 src tests",

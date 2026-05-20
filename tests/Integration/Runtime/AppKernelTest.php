@@ -31,8 +31,11 @@ final class AppKernelTest extends TestCase
             $app = AppKernel::bootstrap(AppRuntimeConfig::fromServer($_SERVER));
 
             ob_start();
-            $app->run();
-            $output = ob_get_clean();
+            try {
+                $app->run();
+            } finally {
+                $output = ob_get_clean();
+            }
 
             self::assertSame('Hello world!', $output);
         } finally {

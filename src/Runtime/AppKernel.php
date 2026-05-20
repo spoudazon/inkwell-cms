@@ -31,13 +31,11 @@ final readonly class AppKernel
         $request = Request::createFromGlobals();
         $response = $this->handle($request);
         $response->send();
+        $this->kernel->terminate($request, $response);
     }
 
     public function handle(Request $request): Response
     {
-        $response = $this->kernel->handle($request);
-        $this->kernel->terminate($request, $response);
-
-        return $response;
+        return $this->kernel->handle($request);
     }
 }
