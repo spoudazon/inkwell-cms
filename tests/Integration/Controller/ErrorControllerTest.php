@@ -17,6 +17,5 @@ final class ErrorControllerTest extends WebTestCase
             $response->headers->get('X-Debug-Exception'),
             'Error has not passed through ErrorController/HtmlErrorRenderer.',
         );
-
     }
 }
