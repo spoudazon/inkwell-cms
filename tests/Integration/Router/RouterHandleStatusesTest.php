@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Spoudazon\InkwellCms\Tests\Integration\Router;
 
-use Spoudazon\InkwellCms\Tests\Integration\WebTestCase;
+use Spoudazon\InkwellCms\Tests\Integration\IntegrationTestCase;
 
-final class RouterHandleStatusesTest extends WebTestCase
+final class RouterHandleStatusesTest extends IntegrationTestCase
 {
     public function testHomeRouteReturnsSuccessfulResponse(): void
     {

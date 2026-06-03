@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Spoudazon\InkwellCms\Tests\Integration\Controller;
 
-use Spoudazon\InkwellCms\Tests\Integration\WebTestCase;
+use Spoudazon\InkwellCms\Tests\Integration\IntegrationTestCase;
 
-final class HomeControllerTest extends WebTestCase
+final class HomeControllerTest extends IntegrationTestCase
 {
     public function testHomeRouteRendersHomePage(): void
     {
@@ -46,17 +46,16 @@ final class HomeControllerTest extends WebTestCase
         self::assertStringContainsString('turns a folder of Markdown into', $html);
     }
 
-    public function testCurrentRequestMarksActiveMenuItem(): void
+    public function testCurrentRequestMarksTheActiveMenuItem(): void
     {
         $html = (string) $this->request('GET', '/')->getContent();
 
-        // The header marks a menu item "current" by comparing the live request
-        // path (exposed via the `app` Twig global) to the item URL. Finding the
-        // Home link -- whose URL is "/" -- carrying the `current` class proves
-        // the current request reached the view through that global.
-        self::assertMatchesRegularExpression(
-            '#<a class="plain current"\s+href="/">Home</a>#',
-            $html,
-        );
+        // The header marks a menu link "current" when its URL matches the live
+        // request path, which it reads from the `app` Twig global. On "/" that
+        // is the Home link -- proof the request reached the template. Whitespace
+        // is collapsed so the assertion ignores the markup's indentation.
+        $markup = (string) preg_replace('/\s+/', ' ', $html);
+
+        self::assertStringContainsString('<a class="plain current" href="/">Home</a>', $markup);
     }
 }

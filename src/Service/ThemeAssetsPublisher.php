@@ -15,20 +15,11 @@ final readonly class ThemeAssetsPublisher
     private const string LOCK_FILE = 'theme-assets.lock';
 
     public function __construct(
-        #[Inject('app.theme')]
-        private string $theme,
-
-        #[Inject('app.root')]
-        private string $appRoot,
-
-        #[Inject('app.cache_dir')]
-        private string $cacheDir,
-
-        #[Inject('app.public_assets_dir')]
-        private string $publicAssetsDir,
-
+        #[Inject('app.theme')] private string $theme,
+        #[Inject('app.root')] private string $appRoot,
+        #[Inject('app.cache_dir')] private string $cacheDir,
+        #[Inject('app.public_assets_dir')] private string $publicAssetsDir,
         private AppRuntimeConfig $config,
-
         private Filesystem $filesystem = new Filesystem(),
     ) {
     }
