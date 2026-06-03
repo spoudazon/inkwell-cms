@@ -9,5 +9,19 @@ return [
     'debug' => true,
     'timezone' => 'Europe/Warsaw',
     'locale' => 'en-US',
-    'domain' => 'localhost'
+    'domain' => 'localhost',
+    'menu' => [
+        'home' => [
+            'title' => 'Home',
+            'url' => '/',
+        ],
+        'about' => [
+            'title' => 'About',
+            'url' => '/page/about',
+        ],
+        'contact' => [
+            'title' => 'Contact',
+            'url' => '/page/contact',
+        ],
+    ],
 ];

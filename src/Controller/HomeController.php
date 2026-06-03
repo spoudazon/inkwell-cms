@@ -24,10 +24,9 @@ final class HomeController
 
     private function siteIntro(): string
     {
-        return "Inkwell is a flat-file CMS that turns a folder of Markdown into "
-            . "a fast, tidy website — no database, no admin panel, nothing to "
-            . "lock you in. Write in plain text, theme it with Twig, and "
-            . "publish whenever you are ready.";
+        return "Inkwell is a flat-file CMS. It turns a folder of Markdown into "
+            . "a plain HTML website using a handful of Twig templates. Content "
+            . "lives in files on disk; there is no database and no admin panel.";
     }
 
     /**
@@ -43,37 +42,37 @@ final class HomeController
     {
         return [
             [
-                'url' => '/post/your-content-stays-in-plain-markdown',
-                'title' => 'Your Content Stays in Plain Markdown',
-                'excerpt' => 'Every page and post is just a Markdown file in a folder you '
-                    . 'own. Edit it in any editor, keep it in Git, and move it anywhere — '
-                    . 'there is no database to export and nothing proprietary to escape.',
+                'url' => '/post/content-stored-as-markdown-files',
+                'title' => 'Content Stored as Markdown Files',
+                'excerpt' => 'Each page and post is a Markdown file in a content folder. The '
+                    . 'files can be edited in any text editor and tracked in version control. '
+                    . 'No database is involved.',
                 'date' => '2026-05-14',
                 'read_time' => 6,
             ],
             [
-                'url' => '/post/theme-it-with-twig-nothing-exotic',
-                'title' => 'Theme It With Twig, Nothing Exotic',
-                'excerpt' => 'Inkwell renders through Twig, so a theme is just templates and '
-                    . 'assets you can read at a glance. Change everything that matters to '
-                    . 'your design and leave the plumbing untouched.',
+                'url' => '/post/themes-are-twig-templates',
+                'title' => 'Themes Are Twig Templates',
+                'excerpt' => 'Pages are rendered through Twig. A theme is a set of templates '
+                    . 'and static assets. There is no separate template language and no build '
+                    . 'step.',
                 'date' => '2026-05-03',
                 'read_time' => 5,
             ],
             [
-                'url' => '/post/fast-because-there-is-less-of-it',
-                'title' => 'Fast Because There Is Less of It',
-                'excerpt' => 'No database round-trips, no sprawling plugin stack — just files '
-                    . 'on disk rendered to HTML. Pages load quickly and the whole site stays '
-                    . 'small enough to understand.',
+                'url' => '/post/few-moving-parts',
+                'title' => 'Few Moving Parts',
+                'excerpt' => 'A request reads a Markdown file and renders it through a Twig '
+                    . 'template. With no database and no plugin layer, little stands between '
+                    . 'the request and the HTML response.',
                 'date' => '2026-04-19',
                 'read_time' => 4,
             ],
             [
-                'url' => '/post/up-and-running-in-a-few-minutes',
-                'title' => 'Up and Running in a Few Minutes',
-                'excerpt' => 'Drop in your Markdown, pick a theme, point a web server at the '
-                    . 'folder. That is the whole setup — the rest is just writing.',
+                'url' => '/post/running-inkwell-locally',
+                'title' => 'Running Inkwell Locally',
+                'excerpt' => 'Inkwell serves a directory of Markdown files. Local development '
+                    . 'needs only PHP\'s built-in web server pointed at the public folder.',
                 'date' => '2026-04-06',
                 'read_time' => null,
             ],

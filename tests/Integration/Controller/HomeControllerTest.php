@@ -30,7 +30,7 @@ final class HomeControllerTest extends WebTestCase
         // instead. Finding a title proves the controller supplied posts and
         // post-card.html.twig rendered them.
         self::assertStringContainsString(
-            '<h2 class="title">Theme It With Twig, Nothing Exotic</h2>',
+            '<h2 class="title">Themes Are Twig Templates</h2>',
             $html,
         );
     }

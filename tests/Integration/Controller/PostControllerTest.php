@@ -10,7 +10,7 @@ final class PostControllerTest extends WebTestCase
 {
     public function testPostRouteRendersPostPage(): void
     {
-        $response = $this->request('GET', '/post/a-theme-system-that-stays-out-of-the-way');
+        $response = $this->request('GET', '/post/how-themes-are-structured');
 
         self::assertSame(200, $response->getStatusCode());
 
@@ -18,8 +18,8 @@ final class PostControllerTest extends WebTestCase
         // The <h1> is the post title and the <h2> comes from inside the post's
         // raw HTML body, so finding both proves the /post/{slug} route resolved
         // and post.html.twig rendered the post in full -- heading and body.
-        self::assertStringContainsString('<h1>A Theme System That Stays Out of the Way</h1>', $html);
-        self::assertStringContainsString('<h2>Three jobs, three folders</h2>', $html);
+        self::assertStringContainsString('<h1>How Themes Are Structured</h1>', $html);
+        self::assertStringContainsString('<h2>Templates, assets and config</h2>', $html);
     }
 
     public function testPostRouteReturns404ForUnknownSlug(): void

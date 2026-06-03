@@ -50,64 +50,59 @@ class PostController
     private function posts(): array
     {
         return [
-            'your-content-stays-in-plain-markdown' => [
-                'url' => '/post/your-content-stays-in-plain-markdown',
-                'title' => 'Your Content Stays in Plain Markdown',
+            'content-stored-as-markdown-files' => [
+                'url' => '/post/content-stored-as-markdown-files',
+                'title' => 'Content Stored as Markdown Files',
                 'date' => '2026-05-14',
                 'updated' => null,
                 'read_time' => 6,
                 'body' => <<<'HTML'
-                    <p>Every page and post in Inkwell is a single Markdown file living in a
-                    folder you own. There is no hidden table, no opaque export format, and
-                    nothing proprietary standing between you and your words.</p>
+                    <p>Each page and post is a single Markdown file in a content folder.
+                    There is no database and no separate storage format: the file on disk
+                    is the source of the page.</p>
 
-                    <h2>Files you can actually hold</h2>
+                    <h2>File format</h2>
 
-                    <p>Open the content folder and you will see exactly what you wrote:
-                    plain text with a little front matter on top. Edit it in any editor,
-                    rename it, or move it to another machine — it behaves like every other
-                    file on your disk because that is all it is.</p>
+                    <p>A file is plain text with a small block of front matter at the top
+                    for metadata, followed by the Markdown body. The files can be created
+                    and edited with any text editor.</p>
 
                     <pre><code class="language-markdown">---
-                    title: Your Content Stays in Plain Markdown
+                    title: Content Stored as Markdown Files
                     date: 2026-05-14
                     ---
 
-                    Every page and post is just a Markdown file in a folder you own.</code></pre>
+                    Each page and post is a single Markdown file in a content folder.</code></pre>
 
-                    <h2>Git is your history</h2>
+                    <h2>Version control</h2>
 
-                    <p>Because the content is text, your version control already knows what
-                    to do with it. Every edit is a diff you can read, every revision is a
-                    commit you can revert, and your backup strategy is whatever you already
-                    use for code.</p>
+                    <p>Because the content is text, it can be tracked in Git like source
+                    code. Changes appear as readable diffs, revisions can be reverted, and
+                    backups are copies of the folder.</p>
 
                     <ul>
-                    <li>No database to dump before you can leave</li>
-                    <li>No migration script when you change tools</li>
-                    <li>No lock-in beyond a folder of files</li>
+                    <li>No database to export or import</li>
+                    <li>No migration step when moving content</li>
+                    <li>The content folder can be copied between machines as-is</li>
                     </ul>
-
-                    <p>The format is the feature: keep your writing in plain Markdown and it
-                    stays yours, long after any particular CMS has come and gone.</p>
                     HTML,
             ],
-            'theme-it-with-twig-nothing-exotic' => [
-                'url' => '/post/theme-it-with-twig-nothing-exotic',
-                'title' => 'Theme It With Twig, Nothing Exotic',
+            'themes-are-twig-templates' => [
+                'url' => '/post/themes-are-twig-templates',
+                'title' => 'Themes Are Twig Templates',
                 'date' => '2026-05-03',
                 'updated' => null,
                 'read_time' => 5,
                 'body' => <<<'HTML'
-                    <p>Inkwell renders every page through Twig, so a theme is nothing more
-                    than templates and assets you can read at a glance. There is no bespoke
-                    templating dialect to learn and no framework hiding the markup from you.</p>
+                    <p>Pages are rendered through Twig. A theme is a set of Twig templates
+                    together with the static assets the pages reference. There is no
+                    separate template language and no build step.</p>
 
-                    <h2>Templates you can read</h2>
+                    <h2>Templates</h2>
 
-                    <p>A layout is a Twig file with the blocks you would expect. Override the
-                    parts that matter to your design and inherit the rest, so a small theme
-                    stays small instead of copying boilerplate it never touches.</p>
+                    <p>A layout is a Twig file built from blocks. Templates extend a base
+                    layout and override the blocks they need, so shared markup is defined
+                    once rather than repeated.</p>
 
                     <pre><code class="language-twig">{% extends 'base.html.twig' %}
 
@@ -115,121 +110,105 @@ class PostController
                       <article>{{ post.body|raw }}</article>
                     {% endblock %}</code></pre>
 
-                    <h2>Assets ship as-is</h2>
+                    <h2>Assets</h2>
 
-                    <p>CSS, fonts and images sit beside the templates and are published
-                    untouched. Style what your readers see; leave the routing, caching and
-                    request handling to the plumbing underneath.</p>
+                    <p>CSS, fonts and images live alongside the templates and are published
+                    unchanged. Routing, caching and request handling stay in the application
+                    rather than in the theme.</p>
 
                     <ul>
-                    <li>Edit the markup directly — it is just HTML in Twig</li>
-                    <li>Drop in stylesheets and fonts without a build pipeline</li>
-                    <li>Change the design without touching application code</li>
+                    <li>Templates are HTML with Twig tags</li>
+                    <li>Stylesheets and fonts are served as static files</li>
+                    <li>The design can change without touching application code</li>
                     </ul>
-
-                    <p>The goal is a theme that does one job well: deciding how the site
-                    looks, and nothing more exotic than that.</p>
                     HTML,
             ],
-            'fast-because-there-is-less-of-it' => [
-                'url' => '/post/fast-because-there-is-less-of-it',
-                'title' => 'Fast Because There Is Less of It',
+            'few-moving-parts' => [
+                'url' => '/post/few-moving-parts',
+                'title' => 'Few Moving Parts',
                 'date' => '2026-04-19',
                 'updated' => null,
                 'read_time' => 4,
                 'body' => <<<'HTML'
-                    <p>Speed in Inkwell is not a clever trick or an aggressive cache. It is
-                    the natural result of doing less: no database round-trips and no sprawling
-                    plugin stack, just files on disk rendered to HTML.</p>
+                    <p>Handling a request is short: read a Markdown file from disk and render
+                    it through a Twig template. There is no database query and no plugin layer
+                    in the path.</p>
 
-                    <h2>Fewer moving parts</h2>
-
-                    <p>Every layer you remove is a layer that cannot be slow. There is no query
-                    to optimise because there is no query, and no plugin to profile because the
-                    request path is short enough to keep in your head.</p>
+                    <h2>Request path</h2>
 
                     <ul>
-                    <li>Read a Markdown file</li>
+                    <li>Read the Markdown file for the requested URL</li>
                     <li>Render it through a Twig template</li>
-                    <li>Send the HTML</li>
+                    <li>Return the resulting HTML</li>
                     </ul>
 
-                    <h2>Small enough to understand</h2>
+                    <h2>Consequences</h2>
 
-                    <p>When the whole site fits in a folder, performance stops being a project
-                    and becomes a side effect. Pages load quickly, the moving parts stay
-                    countable, and you can reason about the entire system without a diagram.</p>
-
-                    <p>The fastest code is the code you never wrote — Inkwell simply takes that
-                    seriously.</p>
+                    <p>With fewer components there is less to configure and less to inspect
+                    when something goes wrong. The whole site is a folder of files, which
+                    keeps the system small enough to read end to end.</p>
                     HTML,
             ],
-            'up-and-running-in-a-few-minutes' => [
-                'url' => '/post/up-and-running-in-a-few-minutes',
-                'title' => 'Up and Running in a Few Minutes',
+            'running-inkwell-locally' => [
+                'url' => '/post/running-inkwell-locally',
+                'title' => 'Running Inkwell Locally',
                 'date' => '2026-04-06',
                 'updated' => null,
                 'read_time' => null,
                 'body' => <<<'HTML'
-                    <p>Getting started with Inkwell is deliberately unremarkable. Drop in your
-                    Markdown, pick a theme, and point a web server at the folder. That is the
-                    whole setup — the rest is just writing.</p>
+                    <p>Inkwell serves a directory of Markdown files. Running it locally needs
+                    PHP and a web server pointed at the public folder; PHP's built-in server
+                    is enough for development.</p>
 
-                    <h2>Three steps</h2>
+                    <h2>Steps</h2>
 
                     <ul>
-                    <li>Add your <strong>Markdown</strong> files to the content folder</li>
-                    <li>Choose a <strong>theme</strong> for how the site should look</li>
-                    <li>Serve the folder with the <strong>web server</strong> you already have</li>
+                    <li>Add Markdown files to the content folder</li>
+                    <li>Select a theme for rendering</li>
+                    <li>Start a web server pointed at the public folder</li>
                     </ul>
 
-                    <pre><code class="language-bash"># Drop a page in, then serve it
+                    <pre><code class="language-bash"># Add a page, then serve the site
                     echo '# Hello, Inkwell' > content/hello.md
                     php -S localhost:8000 -t public</code></pre>
 
-                    <h2>Then get out of the way</h2>
+                    <h2>Publishing</h2>
 
-                    <p>There is no onboarding wizard, no account to create, and no dashboard to
-                    configure before your first page is live. Once the folder is being served,
-                    publishing is just saving a file.</p>
-
-                    <p>Setup should be the least interesting part of running a site, so Inkwell
-                    keeps it that way and lets you spend your time on the words.</p>
+                    <p>There is no separate publishing step. Once the folder is being served,
+                    a page becomes available as soon as its file is saved.</p>
                     HTML,
             ],
-            'a-theme-system-that-stays-out-of-the-way' => [
-                'url' => '/post/a-theme-system-that-stays-out-of-the-way',
-                'title' => 'A Theme System That Stays Out of the Way',
+            'how-themes-are-structured' => [
+                'url' => '/post/how-themes-are-structured',
+                'title' => 'How Themes Are Structured',
                 'date' => '2026-05-14',
                 'updated' => null,
                 'read_time' => 7,
                 'body' => <<<'HTML'
-                    <p>Every theme starts with good intentions and ends as a tangle of
-                    overrides. Inkwell takes the boring way out: give a theme three
-                    clearly separated jobs and never let them bleed into one another.</p>
+                    <p>A theme is a directory with three separate responsibilities:
+                    templates, assets and configuration. Keeping them apart makes the
+                    structure predictable.</p>
 
-                    <h2>Three jobs, three folders</h2>
+                    <h2>Templates, assets and config</h2>
 
-                    <p>A theme is just a directory. Templates render HTML, assets carry
-                    whatever the browser downloads, and a small config file declares the
-                    handful of values an author is actually allowed to change.</p>
+                    <p>Templates render HTML, assets carry whatever the browser downloads,
+                    and a small config file declares the values a site is allowed to set.</p>
 
                     <ul>
-                    <li><strong>templates/</strong> — Twig files, and nothing but Twig files</li>
+                    <li><strong>templates/</strong> — Twig files</li>
                     <li><strong>assets/</strong> — CSS, fonts and images, published as-is</li>
-                    <li><strong>website config</strong> — the small surface an author edits</li>
+                    <li><strong>website config</strong> — the values a site can change</li>
                     </ul>
 
-                    <p>Assets are mirrored into the public directory on first request and
-                    then left alone. There is no build step to forget and no stale bundle
-                    to chase down later:</p>
+                    <p>Assets are copied into the public directory on first request and then
+                    left in place, so there is no separate build step:</p>
 
                     <pre><code class="language-twig">{% include 'partials/header.html.twig' %}
                     {% block content %}{% endblock %}
                     {% include 'partials/footer.html.twig' %}</code></pre>
 
-                    <p>That single constraint is the whole design — everything else is just
-                    keeping the three folders honest.</p>
+                    <p>Each of the three parts has one job, which is the whole of the
+                    structure.</p>
                     HTML,
             ],
         ];
