@@ -76,10 +76,16 @@ final readonly class ThemeAssetsPublisher
 
         try {
             if (!flock($handle, LOCK_EX)) {
+                // @codeCoverageIgnoreStart
+                // Defensive guard: a blocking LOCK_EX waits on contention rather
+                // than returning false, so only a system/filesystem lock error
+                // reaches here -- which cannot be triggered deterministically in
+                // a test the way the fopen() failure above can.
                 throw new IOException(
                     sprintf('Unable to acquire exclusive lock on the theme assets lock file "%s".', $lockPath),
                     path: $lockPath,
                 );
+                // @codeCoverageIgnoreEnd
             }
             $publish();
         } finally {
