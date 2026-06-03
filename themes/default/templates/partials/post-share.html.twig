@@ -5,14 +5,20 @@
 <div class="post-share">
   <span class="lbl">Share</span>
 
-  <a href="https://mastodon.social/share?text={{ text_q }}%20{{ url_q }}"
-     rel="noopener" target="_blank">Mastodon</a>
+  <a href="https://news.ycombinator.com/submitlink?u={{ url_q }}&t={{ text_q }}"
+     rel="noopener" target="_blank">Hacker News</a>
+
+  <a href="https://www.reddit.com/submit?url={{ url_q }}&title={{ text_q }}"
+     rel="noopener" target="_blank">Reddit</a>
 
   <a href="https://twitter.com/intent/tweet?text={{ text_q }}&url={{ url_q }}"
      rel="noopener" target="_blank">X</a>
 
-  <a href="https://news.ycombinator.com/submitlink?u={{ url_q }}&t={{ text_q }}"
-     rel="noopener" target="_blank">Hacker News</a>
+  <a href="https://mastodon.social/share?text={{ text_q }}%20{{ url_q }}"
+     rel="noopener" target="_blank">Mastodon</a>
+
+  <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ url_q }}"
+     rel="noopener" target="_blank">LinkedIn</a>
 
   <button type="button" class="copy-link" data-url="{{ full_url }}">Copy link</button>
 </div>
