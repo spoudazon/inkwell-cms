@@ -3,13 +3,13 @@
 {% set url_q    = full_url|url_encode %}
 
 <div class="post-share">
-  <span class="lbl">Share</span>
+    <span class="lbl">Share</span>
 
-  <a href="https://www.reddit.com/submit?url={{ url_q }}&title={{ text_q }}"
-     rel="noopener noreferrer" target="_blank">Reddit</a>
+    <a href="https://www.reddit.com/submit?url={{ url_q }}&title={{ text_q }}"
+       rel="noopener noreferrer" target="_blank">Reddit</a>
 
-  <a href="https://twitter.com/intent/tweet?text={{ text_q }}&url={{ url_q }}"
-     rel="noopener noreferrer" target="_blank">X</a>
+    <a href="https://twitter.com/intent/tweet?text={{ text_q }}&url={{ url_q }}"
+       rel="noopener noreferrer" target="_blank">X</a>
 
-  <button type="button" class="copy-link" data-url="{{ full_url }}">Copy link</button>
+    <button type="button" class="copy-link" data-url="{{ full_url }}">Copy link</button>
 </div>

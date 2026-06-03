@@ -93,7 +93,7 @@ return [
 
     // Bind the shared RequestStack explicitly: PHP-DI autowiring would otherwise
     // build the kernel a private instance, so the request it pushes would never
-    // be visible to RequestStack consumers such as the Twig `app` global.
+    // be visible to RequestStack consumers.
     HttpKernel::class =>
         autowire()
             ->constructorParameter('requestStack', get(RequestStack::class)),

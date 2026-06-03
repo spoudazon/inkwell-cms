@@ -13,8 +13,6 @@ final class AppGlobalTest extends IntegrationTestCase
 {
     public function testTheAppGlobalIsAvailableToTemplates(): void
     {
-        // Rendering through `app` at all proves the global is registered: with
-        // strict_variables on, an unknown `app` would throw instead.
         $rendered = $this->twig()->createTemplate(
             "{{ app.request is null ? 'no-request' : 'has-request' }}",
         )->render();
@@ -27,9 +25,6 @@ final class AppGlobalTest extends IntegrationTestCase
         $stack = $this->container->get(RequestStack::class);
         self::assertInstanceOf(RequestStack::class, $stack);
 
-        // Push a request onto the very stack the kernel feeds during a real
-        // request, then render through the container's Twig: this proves the
-        // `app` global reflects the live request end to end.
         $request = Request::create('/post/hello');
         $request->attributes->set('_route', 'post');
         $stack->push($request);

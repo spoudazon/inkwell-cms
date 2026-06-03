@@ -36,6 +36,9 @@
         }
     },
     "scripts": {
+        "publish-assets": "@php bin/publish-assets.php",
+        "post-install-cmd": ["@publish-assets"],
+        "post-update-cmd": ["@publish-assets"],
         "test": "@php -d zend.assertions=1 vendor/bin/phpunit tests/",
         "test:coverage": [
             "@putenv XDEBUG_MODE=coverage",

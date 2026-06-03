@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Spoudazon\InkwellCms\EventSubscriber;
 
+use Spoudazon\InkwellCms\Runtime\AppRuntimeConfig;
 use Spoudazon\InkwellCms\Service\ThemeAssetsPublisher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -12,7 +13,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
 final readonly class ThemeAssetsSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private ThemeAssetsPublisher $publisher
+        private ThemeAssetsPublisher $publisher,
+        private AppRuntimeConfig $config,
     ) {
     }
 
@@ -25,7 +27,7 @@ final readonly class ThemeAssetsSubscriber implements EventSubscriberInterface
 
     public function onKernelRequest(RequestEvent $event): void
     {
-        if (!$event->isMainRequest()) {
+        if (!$event->isMainRequest() || !$this->config->isDebug()) {
             return;
         }
 

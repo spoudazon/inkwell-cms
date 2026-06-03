@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Spoudazon\InkwellCms\Tests\Unit\Service;
 
 use PHPUnit\Framework\TestCase;
-use Spoudazon\InkwellCms\Runtime\AppRuntimeConfig;
 use Spoudazon\InkwellCms\Service\ThemeAssetsPublisher;
-use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
 
 final class ThemeAssetsPublisherTest extends TestCase
@@ -42,19 +40,6 @@ final class ThemeAssetsPublisherTest extends TestCase
         self::assertStringEqualsFile($this->publishedAssetPath('css/all.css'), 'body{}');
     }
 
-    public function testWritesManifestNamingThePublishedTheme(): void
-    {
-        $assetFile = $this->root . '/var/cache/theme-assets.manifest';
-
-        self::assertFileDoesNotExist($assetFile);
-
-        $this->giveThemeAsset('default', 'css/all.css', 'body{}');
-
-        $this->publisher(theme: 'default')->publishAssets();
-
-        self::assertStringEqualsFile($assetFile, 'default');
-    }
-
     public function testDoesNothingWhenThemeShipsNoAssets(): void
     {
         // No themes/default/assets directory is created at all.
@@ -63,10 +48,10 @@ final class ThemeAssetsPublisherTest extends TestCase
         self::assertDirectoryDoesNotExist($this->root . '/public/assets');
     }
 
-    public function testDebugModeRepublishesNewlyAddedFiles(): void
+    public function testRepublishesNewlyAddedFiles(): void
     {
         $this->giveThemeAsset('default', 'css/all.css', 'body{}');
-        $publisher = $this->publisher(env: 'dev');
+        $publisher = $this->publisher();
         $publisher->publishAssets();
 
         $this->giveThemeAsset('default', 'css/print.css', '@media print{}');
@@ -75,17 +60,13 @@ final class ThemeAssetsPublisherTest extends TestCase
         self::assertFileExists($this->publishedAssetPath('css/print.css'));
     }
 
-    public function testDebugModeRepublishesUpdatedFileContents(): void
+    public function testRepublishesUpdatedFileContents(): void
     {
-        $source = $this->giveThemeAsset('default', 'css/all.css', 'old');
-        $publisher = $this->publisher(env: 'dev');
+        $this->giveThemeAsset('default', 'css/all.css', 'old');
+        $publisher = $this->publisher();
         $publisher->publishAssets();
 
         $this->giveThemeAsset('default', 'css/all.css', 'new');
-        // mirror() copies a file only when the source is newer than the
-        // published copy; bump the mtime explicitly so the assertion does
-        // not depend on sub-second timing between the two publish calls.
-        touch($source, time() + 5);
         $publisher->publishAssets();
 
         self::assertStringEqualsFile($this->publishedAssetPath('css/all.css'), 'new');
@@ -94,7 +75,7 @@ final class ThemeAssetsPublisherTest extends TestCase
     public function testRemovesAssetsThatNoLongerExistInTheTheme(): void
     {
         $stale = $this->giveThemeAsset('default', 'css/legacy.css', 'legacy');
-        $publisher = $this->publisher(env: 'dev');
+        $publisher = $this->publisher();
         $publisher->publishAssets();
         self::assertFileExists($this->publishedAssetPath('css/legacy.css'));
 
@@ -104,51 +85,24 @@ final class ThemeAssetsPublisherTest extends TestCase
         self::assertFileDoesNotExist($this->publishedAssetPath('css/legacy.css'));
     }
 
-    public function testProductionPublishesOnlyOnce(): void
-    {
-        $this->giveThemeAsset('default', 'css/all.css', 'body{}');
-        $publisher = $this->publisher(env: 'prod');
-        $publisher->publishAssets();
-
-        // A file added after the first publish must be ignored in production.
-        $this->giveThemeAsset('default', 'css/print.css', '@media print{}');
-        $publisher->publishAssets();
-
-        self::assertFileDoesNotExist($this->publishedAssetPath('css/print.css'));
-    }
-
-    public function testProductionRepublishesWhenTheConfiguredThemeChanges(): void
+    public function testRepublishesWhenTheConfiguredThemeChanges(): void
     {
         $this->giveThemeAsset('default', 'css/light.css', 'light');
-        $this->publisher(theme: 'default', env: 'prod')->publishAssets();
+        $this->publisher(theme: 'default')->publishAssets();
 
         $this->giveThemeAsset('dark', 'css/dark.css', 'dark');
-        $this->publisher(theme: 'dark', env: 'prod')->publishAssets();
+        $this->publisher(theme: 'dark')->publishAssets();
 
         self::assertFileExists($this->publishedAssetPath('css/dark.css'));
         self::assertFileDoesNotExist($this->publishedAssetPath('css/light.css'));
     }
 
-    public function testThrowsWhenTheLockFileCannotBeOpened(): void
-    {
-        $this->giveThemeAsset('default', 'css/all.css', 'body{}');
-        // Occupy the lock file path with a directory so fopen() cannot open
-        // it — deterministic regardless of the user the test runs as.
-        $this->filesystem->mkdir($this->root . '/var/cache/theme-assets.lock');
-
-        $this->expectException(IOException::class);
-
-        $this->publisher()->publishAssets();
-    }
-
-    private function publisher(string $theme = 'default', string $env = 'dev'): ThemeAssetsPublisher
+    private function publisher(string $theme = 'default'): ThemeAssetsPublisher
     {
         return new ThemeAssetsPublisher(
             theme: $theme,
             appRoot: $this->root,
-            cacheDir: $this->root . '/var/cache',
             publicAssetsDir: '/assets',
-            config: AppRuntimeConfig::fromServer(['APP_ENV' => $env]),
             filesystem: $this->filesystem,
         );
     }

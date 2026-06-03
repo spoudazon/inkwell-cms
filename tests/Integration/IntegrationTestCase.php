@@ -12,11 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernel;
 
-/**
- * Base for integration tests: boots the real application container once per
- * test. Use $this->container to reach wired services, or $this->request() to
- * drive the kernel through a full request/response cycle.
- */
 abstract class IntegrationTestCase extends TestCase
 {
     protected Container $container;

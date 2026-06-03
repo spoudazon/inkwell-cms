@@ -1,9 +1,4 @@
-/* Self-hosted web fonts (latin + latin-ext subsets).
-   Generated from the Google Fonts css2 response for the families this
-   theme uses. Hanken Grotesk and Source Serif 4 are variable fonts: one
-   file backs a weight range (declared as `font-weight: min max`), so the
-   filenames carry no weight. IBM Plex Mono is static (one file per
-   weight). Same-origin serving avoids leaking visitor IPs to Google. */
+/* Same-origin serving avoids leaking visitor IPs to Google. */
 
 @font-face {
   font-family: 'Hanken Grotesk';

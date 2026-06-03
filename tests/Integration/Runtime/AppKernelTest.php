@@ -17,9 +17,6 @@ final class AppKernelTest extends TestCase
 
         $response = $app->handle(Request::create('/'));
 
-        // 200 = the route is registered and matched; a non-empty body = the
-        // controller produced a real response. Whether the markup is correct
-        // is HomeControllerTest's concern, not the kernel's.
         self::assertSame(200, $response->getStatusCode());
         self::assertNotEmpty((string) $response->getContent());
     }
