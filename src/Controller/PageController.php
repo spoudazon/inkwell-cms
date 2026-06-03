@@ -61,6 +61,10 @@ class PageController
                     up when there is something worth saying, and not before.</p>
                     HTML,
             ],
+            'contact' => [
+                'title' => 'Contact',
+                'body' => ''
+            ],
         ];
     }
 }

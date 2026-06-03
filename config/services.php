@@ -6,6 +6,8 @@ use DI\Container;
 use Spoudazon\InkwellCms\Controller\ErrorController;
 use Spoudazon\InkwellCms\EventSubscriber\ThemeAssetsSubscriber;
 use Spoudazon\InkwellCms\Runtime\AppRuntimeConfig;
+use Spoudazon\InkwellCms\Twig\AppExtension;
+use Spoudazon\InkwellCms\Twig\AppVariable;
 use Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -47,6 +49,8 @@ return [
         $twig->addGlobal('website', $c->get('app.website'));
         $twig->addGlobal('public_assets_dir', $c->get('app.public_assets_dir'));
 
+        $twig->addExtension($c->get(AppExtension::class));
+
         return $twig;
     }),
 
@@ -86,5 +90,14 @@ return [
     ControllerResolverInterface::class => get(ContainerControllerResolver::class),
 
     RequestStack::class => autowire(),
-    HttpKernel::class => autowire()
+
+    // Bind the shared RequestStack explicitly: PHP-DI autowiring would otherwise
+    // build the kernel a private instance, so the request it pushes would never
+    // be visible to RequestStack consumers such as the Twig `app` global.
+    HttpKernel::class =>
+        autowire()
+            ->constructorParameter('requestStack', get(RequestStack::class)),
+
+    AppVariable::class => factory(fn(Container $c) => new AppVariable($c->get(RequestStack::class))),
+    AppExtension::class => factory(fn(Container $c) => new AppExtension($c->get(AppVariable::class))),
 ];

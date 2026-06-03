@@ -87,40 +87,43 @@ class PostController
                     </ul>
                     HTML,
             ],
-            'themes-are-twig-templates' => [
-                'url' => '/post/themes-are-twig-templates',
-                'title' => 'Themes Are Twig Templates',
+            'writing-posts-in-markdown' => [
+                'url' => '/post/writing-posts-in-markdown',
+                'title' => 'Writing Posts in Markdown',
                 'date' => '2026-05-03',
                 'updated' => null,
                 'read_time' => 5,
                 'body' => <<<'HTML'
-                    <p>Pages are rendered through Twig. A theme is a set of Twig templates
-                    together with the static assets the pages reference. There is no
-                    separate template language and no build step.</p>
+                    <p>A post is a Markdown file. The top of the file holds a small block of
+                    front matter for metadata; everything below it is the text of the post,
+                    written in ordinary Markdown.</p>
 
-                    <h2>Templates</h2>
+                    <h2>Front matter</h2>
 
-                    <p>A layout is a Twig file built from blocks. Templates extend a base
-                    layout and override the blocks they need, so shared markup is defined
-                    once rather than repeated.</p>
+                    <p>The front matter is a short list of values, such as the title and the
+                    date. These are read when the page is built and used for things like the
+                    heading and the post listing.</p>
 
-                    <pre><code class="language-twig">{% extends 'base.html.twig' %}
+                    <pre><code class="language-markdown">---
+                    title: Writing Posts in Markdown
+                    date: 2026-05-03
+                    ---
 
-                    {% block content %}
-                      <article>{{ post.body|raw }}</article>
-                    {% endblock %}</code></pre>
+                    The text of the post starts here.</code></pre>
 
-                    <h2>Assets</h2>
+                    <h2>Formatting</h2>
 
-                    <p>CSS, fonts and images live alongside the templates and are published
-                    unchanged. Routing, caching and request handling stay in the application
-                    rather than in the theme.</p>
+                    <p>The body uses standard Markdown, so the common elements all work without
+                    anything extra:</p>
 
                     <ul>
-                    <li>Templates are HTML with Twig tags</li>
-                    <li>Stylesheets and fonts are served as static files</li>
-                    <li>The design can change without touching application code</li>
+                    <li>Headings, paragraphs and lists</li>
+                    <li>Links, emphasis and inline code</li>
+                    <li>Fenced code blocks</li>
                     </ul>
+
+                    <p>When the page is built, the Markdown is turned into the HTML that is
+                    sent to the browser.</p>
                     HTML,
             ],
             'few-moving-parts' => [
@@ -130,16 +133,16 @@ class PostController
                 'updated' => null,
                 'read_time' => 4,
                 'body' => <<<'HTML'
-                    <p>Handling a request is short: read a Markdown file from disk and render
-                    it through a Twig template. There is no database query and no plugin layer
-                    in the path.</p>
+                    <p>Handling a request is short: read a Markdown file from disk and turn it
+                    into an HTML page. There is no database query and no plugin layer in the
+                    path.</p>
 
                     <h2>Request path</h2>
 
                     <ul>
                     <li>Read the Markdown file for the requested URL</li>
-                    <li>Render it through a Twig template</li>
-                    <li>Return the resulting HTML</li>
+                    <li>Convert the Markdown to HTML</li>
+                    <li>Return the resulting page</li>
                     </ul>
 
                     <h2>Consequences</h2>
@@ -156,59 +159,23 @@ class PostController
                 'updated' => null,
                 'read_time' => null,
                 'body' => <<<'HTML'
-                    <p>Inkwell serves a directory of Markdown files. Running it locally needs
-                    PHP and a web server pointed at the public folder; PHP's built-in server
-                    is enough for development.</p>
+                    <p>Inkwell comes with a Docker setup, so it can be started without
+                    installing PHP or a web server on the host. A single command builds the
+                    image and serves the site.</p>
 
-                    <h2>Steps</h2>
+                    <h2>Starting it</h2>
 
-                    <ul>
-                    <li>Add Markdown files to the content folder</li>
-                    <li>Select a theme for rendering</li>
-                    <li>Start a web server pointed at the public folder</li>
-                    </ul>
+                    <pre><code class="language-bash"># Build the image and serve the site
+                    docker compose up</code></pre>
 
-                    <pre><code class="language-bash"># Add a page, then serve the site
-                    echo '# Hello, Inkwell' > content/hello.md
-                    php -S localhost:8000 -t public</code></pre>
+                    <p>Once it is running, the site is available at
+                    <code>http://localhost:8080</code>. The content folder is mounted into the
+                    container, so edits to the Markdown files show up without a rebuild.</p>
 
                     <h2>Publishing</h2>
 
-                    <p>There is no separate publishing step. Once the folder is being served,
-                    a page becomes available as soon as its file is saved.</p>
-                    HTML,
-            ],
-            'how-themes-are-structured' => [
-                'url' => '/post/how-themes-are-structured',
-                'title' => 'How Themes Are Structured',
-                'date' => '2026-05-14',
-                'updated' => null,
-                'read_time' => 7,
-                'body' => <<<'HTML'
-                    <p>A theme is a directory with three separate responsibilities:
-                    templates, assets and configuration. Keeping them apart makes the
-                    structure predictable.</p>
-
-                    <h2>Templates, assets and config</h2>
-
-                    <p>Templates render HTML, assets carry whatever the browser downloads,
-                    and a small config file declares the values a site is allowed to set.</p>
-
-                    <ul>
-                    <li><strong>templates/</strong> — Twig files</li>
-                    <li><strong>assets/</strong> — CSS, fonts and images, published as-is</li>
-                    <li><strong>website config</strong> — the values a site can change</li>
-                    </ul>
-
-                    <p>Assets are copied into the public directory on first request and then
-                    left in place, so there is no separate build step:</p>
-
-                    <pre><code class="language-twig">{% include 'partials/header.html.twig' %}
-                    {% block content %}{% endblock %}
-                    {% include 'partials/footer.html.twig' %}</code></pre>
-
-                    <p>Each of the three parts has one job, which is the whole of the
-                    structure.</p>
+                    <p>There is no separate publishing step. While the site is being served, a
+                    page becomes available as soon as its file is saved.</p>
                     HTML,
             ],
         ];

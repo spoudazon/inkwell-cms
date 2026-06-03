@@ -30,7 +30,7 @@ final class HomeControllerTest extends WebTestCase
         // instead. Finding a title proves the controller supplied posts and
         // post-card.html.twig rendered them.
         self::assertStringContainsString(
-            '<h2 class="title">Themes Are Twig Templates</h2>',
+            '<h2 class="title">Writing Posts in Markdown</h2>',
             $html,
         );
     }
@@ -44,5 +44,19 @@ final class HomeControllerTest extends WebTestCase
         // its text proves that value reached and rendered in the view.
         self::assertStringContainsString('class="blog-intro"', $html);
         self::assertStringContainsString('turns a folder of Markdown into', $html);
+    }
+
+    public function testCurrentRequestMarksActiveMenuItem(): void
+    {
+        $html = (string) $this->request('GET', '/')->getContent();
+
+        // The header marks a menu item "current" by comparing the live request
+        // path (exposed via the `app` Twig global) to the item URL. Finding the
+        // Home link -- whose URL is "/" -- carrying the `current` class proves
+        // the current request reached the view through that global.
+        self::assertMatchesRegularExpression(
+            '#<a class="plain current"\s+href="/">Home</a>#',
+            $html,
+        );
     }
 }
