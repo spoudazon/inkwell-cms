@@ -19,9 +19,11 @@
         "php": "^8.4",
         "php-di/php-di": "^7.1",
         "symfony/error-handler": "^8.0",
+        "symfony/filesystem": "^8.0",
         "symfony/http-foundation": "^8.0",
         "symfony/http-kernel": "^8.0",
-        "symfony/routing": "^8.0"
+        "symfony/routing": "^8.0",
+        "twig/twig": "^3.25"
     },
     "autoload": {
         "psr-4": {
@@ -34,6 +36,9 @@
         }
     },
     "scripts": {
+        "publish-assets": "@php bin/publish-assets.php",
+        "post-install-cmd": ["@publish-assets"],
+        "post-update-cmd": ["@publish-assets"],
         "test": "@php -d zend.assertions=1 vendor/bin/phpunit tests/",
         "test:coverage": [
             "@putenv XDEBUG_MODE=coverage",

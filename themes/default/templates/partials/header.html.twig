@@ -1,0 +1,12 @@
+<header class="blog-hdr">
+  <a class="home" href="{{ website.url }}">{{ website.name|default('InkwellCMS') }}</a>
+  <nav>
+    {% for key, item in website.menu|default([]) %}
+      {% set itemUrl = item.url|default('#') %}
+      {% set itemTitle = item.title|default(itemUrl) %}
+      {% set isCurrent = app.request and app.request.pathInfo == itemUrl %}
+      <a class="plain {{ isCurrent ? 'current' : '' }}"
+         href="{{ itemUrl }}">{{ itemTitle }}</a>
+    {% endfor %}
+  </nav>
+</header>

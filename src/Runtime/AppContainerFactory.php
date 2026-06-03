@@ -21,6 +21,7 @@ final readonly class AppContainerFactory
     {
         $this->builder
             ->useAutowiring(true)
+            ->useAttributes(true)
             ->addDefinitions([
                 AppRuntimeConfig::class => $config,
                 AppEnvironment::class => $config->environment(),

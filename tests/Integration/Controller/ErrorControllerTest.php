@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Spoudazon\InkwellCms\Tests\Integration\Controller;
 
-use Spoudazon\InkwellCms\Tests\Integration\WebTestCase;
+use Spoudazon\InkwellCms\Tests\Integration\IntegrationTestCase;
 
-final class ErrorControllerTest extends WebTestCase
+final class ErrorControllerTest extends IntegrationTestCase
 {
     public function testErrorHandling(): void
     {

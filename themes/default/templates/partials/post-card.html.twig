@@ -1,0 +1,13 @@
+{% import 'partials/macros.html.twig' as fmt %}
+
+<a class="item row-link" href="{{ post.url }}">
+  <h2 class="title">{{ post.title }}</h2>
+  <p class="excerpt">{{ post.excerpt }}</p>
+  <div class="meta">
+    <time datetime="{{ fmt.date_iso(post.date) }}">{{ fmt.date_readable(post.date) }}</time>
+    {% if post.read_time %}
+      <span class="sep">·</span>
+      <span>{{ post.read_time }} min</span>
+    {% endif %}
+  </div>
+</a>
