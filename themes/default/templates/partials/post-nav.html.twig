@@ -1,0 +1,19 @@
+<nav class="post-nav" aria-label="Post navigation">
+  {% if prev %}
+    <a class="cell prev row-link" href="{{ prev.url }}">
+      <div class="dir">← Older</div>
+      <div class="title">{{ prev.title }}</div>
+    </a>
+  {% else %}
+    <span class="cell empty"></span>
+  {% endif %}
+
+  {% if next %}
+    <a class="cell next row-link" href="{{ next.url }}">
+      <div class="dir">Newer →</div>
+      <div class="title">{{ next.title }}</div>
+    </a>
+  {% else %}
+    <span class="cell empty"></span>
+  {% endif %}
+</nav>

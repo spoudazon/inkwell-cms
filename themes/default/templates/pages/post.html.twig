@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% set view = 'post' %}
+
+{% block title %}{{ post.title }} · {{ author.name }}{% endblock %}
+
+{% block content %}
+  <article class="post">
+    {% include 'partials/post-meta.html.twig' %}
+
+    <h1>{{ post.title }}</h1>
+
+      {{ post.body|raw }}
+
+    <div class="post-foot">
+      {% include 'partials/post-share.html.twig' %}
+      {% include 'partials/post-nav.html.twig' %}
+    </div>
+  </article>
+{% endblock %}

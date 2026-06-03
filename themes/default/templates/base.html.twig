@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="{{ website.locale|default('en') }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{{ title|default(website.name) }}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ public_assets_dir }}/css/fonts.css">
+    <link rel="stylesheet" href="{{ public_assets_dir }}/css/all.css">
+</head>
+<body class="blog">
+<div class="wrap">
+    {% include 'partials/header.html.twig' %}
+
+    {% block content %}{% endblock %}
+
+    {% include 'partials/footer.html.twig' %}
+</div>
+<script defer src="{{ public_assets_dir }}/js/theme.js"></script>
+</body>
+</html>

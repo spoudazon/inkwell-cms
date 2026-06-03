@@ -2,3 +2,5 @@
 /vendor/
 /var/
 /.phpunit.cache
+/public/assets
+coverage*

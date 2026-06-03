@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% set view = 'home' %}
+
+{% block content %}
+    {% if intro|default %}
+        <section class="blog-intro">
+            <p>{{ intro }}</p>
+        </section>
+    {% endif %}
+
+    <div class="post-list">
+        {% for post in posts|default([]) %}
+            {% include 'partials/post-card.html.twig' %}
+        {% else %}
+            <p>No posts.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
