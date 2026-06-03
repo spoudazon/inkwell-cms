@@ -147,6 +147,7 @@ final class ThemeAssetsPublisherTest extends TestCase
             theme: $theme,
             appRoot: $this->root,
             cacheDir: $this->root . '/var/cache',
+            publicAssetsDir: '/assets',
             config: AppRuntimeConfig::fromServer(['APP_ENV' => $env]),
             filesystem: $this->filesystem,
         );

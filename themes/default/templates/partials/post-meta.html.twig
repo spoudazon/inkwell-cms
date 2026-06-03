@@ -5,11 +5,11 @@
 
   {% if post.updated and post.updated|date('Y-m-d') != post.date|date('Y-m-d') %}
     <span class="dot">·</span>
-    <span>akt. <time datetime="{{ fmt.date_iso(post.updated) }}">{{ fmt.date_readable(post.updated) }}</time></span>
+    <span>upd. <time datetime="{{ fmt.date_iso(post.updated) }}">{{ fmt.date_readable(post.updated) }}</time></span>
   {% endif %}
 
   {% if post.read_time %}
     <span class="dot">·</span>
-    <span>{{ post.read_time }} min czytania</span>
+    <span>{{ post.read_time }} min read</span>
   {% endif %}
 </div>

@@ -24,9 +24,10 @@ final class HomeController
 
     private function siteIntro(): string
     {
-        return "Inkwell is Alex Carter's notebook on building small, sharp "
-            . "software — short essays on PHP, theming, and the decisions "
-            . "that keep a codebase honest.";
+        return "Inkwell is a flat-file CMS that turns a folder of Markdown into "
+            . "a fast, tidy website — no database, no admin panel, nothing to "
+            . "lock you in. Write in plain text, theme it with Twig, and "
+            . "publish whenever you are ready.";
     }
 
     /**
@@ -42,36 +43,37 @@ final class HomeController
     {
         return [
             [
-                'url' => '/post/a-theme-system-that-stays-out-of-the-way',
-                'title' => 'A Theme System That Stays Out of the Way',
-                'excerpt' => 'A good theme lets authors change everything that matters and '
-                    . 'break nothing that does not. Here is how Inkwell keeps templates, '
-                    . 'assets, and configuration cleanly apart.',
+                'url' => '/post/your-content-stays-in-plain-markdown',
+                'title' => 'Your Content Stays in Plain Markdown',
+                'excerpt' => 'Every page and post is just a Markdown file in a folder you '
+                    . 'own. Edit it in any editor, keep it in Git, and move it anywhere — '
+                    . 'there is no database to export and nothing proprietary to escape.',
                 'date' => '2026-05-14',
-                'read_time' => 7,
+                'read_time' => 6,
             ],
             [
-                'url' => '/post/rendering-markdown-without-the-ceremony',
-                'title' => 'Rendering Markdown Without the Ceremony',
-                'excerpt' => 'Most Markdown pipelines collapse under their own '
-                    . 'configuration. This one does the obvious thing and then gets out '
-                    . 'of the way.',
+                'url' => '/post/theme-it-with-twig-nothing-exotic',
+                'title' => 'Theme It With Twig, Nothing Exotic',
+                'excerpt' => 'Inkwell renders through Twig, so a theme is just templates and '
+                    . 'assets you can read at a glance. Change everything that matters to '
+                    . 'your design and leave the plumbing untouched.',
                 'date' => '2026-05-03',
                 'read_time' => 5,
             ],
             [
-                'url' => '/post/twig-inheritance-in-plain-language',
-                'title' => 'Twig Inheritance in Plain Language',
-                'excerpt' => 'Blocks, includes, and macros explained without the jargon, '
-                    . 'with the trade-offs that decide which one to reach for.',
+                'url' => '/post/fast-because-there-is-less-of-it',
+                'title' => 'Fast Because There Is Less of It',
+                'excerpt' => 'No database round-trips, no sprawling plugin stack — just files '
+                    . 'on disk rendered to HTML. Pages load quickly and the whole site stays '
+                    . 'small enough to understand.',
                 'date' => '2026-04-19',
-                'read_time' => 9,
+                'read_time' => 4,
             ],
             [
-                'url' => '/post/notes-on-the-first-release',
-                'title' => 'Notes on the First Release',
-                'excerpt' => 'What shipped, what was deliberately left out, and the '
-                    . 'smallest set of features that still felt honest to call a 1.0.',
+                'url' => '/post/up-and-running-in-a-few-minutes',
+                'title' => 'Up and Running in a Few Minutes',
+                'excerpt' => 'Drop in your Markdown, pick a theme, point a web server at the '
+                    . 'folder. That is the whole setup — the rest is just writing.',
                 'date' => '2026-04-06',
                 'read_time' => null,
             ],

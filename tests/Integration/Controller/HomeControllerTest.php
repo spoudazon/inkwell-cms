@@ -30,7 +30,7 @@ final class HomeControllerTest extends WebTestCase
         // instead. Finding a title proves the controller supplied posts and
         // post-card.html.twig rendered them.
         self::assertStringContainsString(
-            '<h2 class="title">Rendering Markdown Without the Ceremony</h2>',
+            '<h2 class="title">Theme It With Twig, Nothing Exotic</h2>',
             $html,
         );
     }
@@ -43,6 +43,6 @@ final class HomeControllerTest extends WebTestCase
         // non-empty `intro`, so the section class together with a fragment of
         // its text proves that value reached and rendered in the view.
         self::assertStringContainsString('class="blog-intro"', $html);
-        self::assertStringContainsString('notebook on building small, sharp', $html);
+        self::assertStringContainsString('turns a folder of Markdown into', $html);
     }
 }

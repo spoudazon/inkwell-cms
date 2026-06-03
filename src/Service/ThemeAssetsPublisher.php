@@ -17,11 +17,18 @@ final readonly class ThemeAssetsPublisher
     public function __construct(
         #[Inject('app.theme')]
         private string $theme,
+
         #[Inject('app.root')]
         private string $appRoot,
+
         #[Inject('app.cache_dir')]
         private string $cacheDir,
+
+        #[Inject('app.public_assets_dir')]
+        private string $publicAssetsDir,
+
         private AppRuntimeConfig $config,
+
         private Filesystem $filesystem = new Filesystem(),
     ) {
     }
@@ -43,7 +50,7 @@ final readonly class ThemeAssetsPublisher
         $this->withLock(function () use ($source): void {
             $this->filesystem->mirror(
                 $source,
-                $this->appRoot . '/public/assets',
+                $this->appRoot . '/public' . $this->publicAssetsDir,
                 options: ['override' => false, 'delete' => true],
             );
 
@@ -59,7 +66,7 @@ final readonly class ThemeAssetsPublisher
             return false;
         }
 
-        return trim((string) file_get_contents($manifest)) === $this->theme;
+        return trim((string)file_get_contents($manifest)) === $this->theme;
     }
 
     private function withLock(callable $publish): void
@@ -77,7 +84,12 @@ final readonly class ThemeAssetsPublisher
         }
 
         try {
-            flock($handle, LOCK_EX);
+            if (!flock($handle, LOCK_EX)) {
+                throw new IOException(
+                    sprintf('Unable to acquire exclusive lock on the theme assets lock file "%s".', $lockPath),
+                    path: $lockPath,
+                );
+            }
             $publish();
         } finally {
             flock($handle, LOCK_UN);

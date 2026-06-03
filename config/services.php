@@ -30,6 +30,7 @@ return [
     'app.routes' => factory(fn() => require __DIR__ . '/routes.php'),
     'app.templates_dir' => DI\string('{app.root}/themes/{app.theme}/templates'),
     'app.website' => factory(fn() => require __DIR__ . '/website.php'),
+    'app.public_assets_dir' => DI\string('/assets'),
 
     RequestContext::class => factory(fn() => new RequestContext()),
 
@@ -44,6 +45,7 @@ return [
         );
 
         $twig->addGlobal('website', $c->get('app.website'));
+        $twig->addGlobal('public_assets_dir', $c->get('app.public_assets_dir'));
 
         return $twig;
     }),
